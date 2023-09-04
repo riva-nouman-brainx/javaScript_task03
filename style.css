@@ -5,8 +5,8 @@ body {
   text-align: center;
   height: 100vh;
 }
-hr{
-    opacity: 1;
+hr {
+  opacity: 1;
 }
 .todo-heading {
   font-family: "Times New Roman", Times, serif;
@@ -37,18 +37,17 @@ hr{
   margin-top: 2rem;
 }
 
-#list-container li{
-    list-style: none;
-    font-size: 17px;
-    /* padding: 12px 8px 12px 50px; */
-    user-select: none;
-    cursor: none;
-    position: relative;
-}
-#list-container hr{
-    border: 3px solid black;
-    
+.list-item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border-bottom: 3px solid black;
+  list-style: none;
+  font-size: 17px;
+  user-select: none;
+  position: relative;
 }
 
-
-
+.list-item i,input{
+    cursor: pointer;
+}
