@@ -1,8 +1,8 @@
 const form = document.getElementById("form");
 const entry = document.getElementById("input-task");
 const listOfThings = document.getElementById("list-of-things");
-const hiddenSubmit = document.getElementById("hiddenSubmit");
 entry.addEventListener("keypress", inputFunction);
+let listCount=0;
 function inputFunction(event){
     if (event.key === "Enter") {
         event.preventDefault(); // Prevent the default form submission behavior
@@ -19,7 +19,7 @@ function createLIS(val){
     li.className='list-item';
     li.innerHTML=`
         <div class="d-flex align-items-center">
-            <input type="checkbox">
+            <input type="checkbox" id="box-${listCount}">
             <div class="m-2"> 
                 ${val}
             </div>
@@ -31,6 +31,36 @@ function createLIS(val){
     
     listOfThings.append(li);
     
+    li.querySelector('#icon1').addEventListener("click", editEntry);
+    li.querySelector('#icon2').addEventListener("click", delEntry);
+    const checkbox = document.getElementById("box-"+listCount);
+    checkbox.addEventListener("change", checkEntry);
+    listCount++;
+}
+function editEntry(event){
+    const inputElement = document.createElement("input");
+    inputElement.type = "text";
+    inputElement.value = textElement.textContent;
+
 
 }
+function delEntry(event){
+    listOfThings.removeChild(event.target.parentElement.parentElement);
+
+}
+function checkEntry(event){
+    console.log(event)
+    const checkbox = event.target;
+    const siblingDiv = checkbox.nextElementSibling;
+    if (siblingDiv) {
+        if(checkbox.checked){
+            siblingDiv.style.textDecoration = "line-through"; 
+        }
+        else{
+            siblingDiv.style.textDecoration = "none"; 
+        }
+    }
+}
+
+
 
