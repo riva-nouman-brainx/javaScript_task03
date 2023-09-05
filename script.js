@@ -40,26 +40,29 @@ function createLIS(val){
 function editEntry(event){
     const tempArr=event.target.parentElement.previousElementSibling.children;
     const inputElement=tempArr[0];
-    inputElement.type = "text";
-    inputElement.style.height="28px";
-    inputElement.value=inputElement.nextElementSibling.innerHTML.trim();
-    inputElement.nextElementSibling.innerHTML="";
-    inputElement.addEventListener("keypress", function(event) {
-       if(event.key=="Enter" && inputElement.value.length!==0){
-        inputElement.nextElementSibling.innerHTML=inputElement.value;
-        inputElement.type = "checkbox";
-        inputElement.blur();
-       }
-       else if (event.key=="Enter" && inputElement.value.length===0){
-        alert("Don't leave the field empty");
-       }
-      });
-
+    if(inputElement.type=="checkbox"){ 
+        inputElement.type = "text";
+        inputElement.style.height="28px";
+        inputElement.value=inputElement.nextElementSibling.innerHTML.trim();
+        inputElement.nextElementSibling.innerHTML="";
+        if (!inputElement.hasEventListener) {
+            inputElement.hasEventListener = true; 
+            inputElement.addEventListener("keypress", function (event) {
+                if (event.key == "Enter" && inputElement.value.length !== 0) {
+                    inputElement.nextElementSibling.innerHTML = inputElement.value;
+                    inputElement.type = "checkbox";
+                    inputElement.blur();
+                } else if (event.key == "Enter" && inputElement.value.length === 0) {
+                    alert("Don't leave the field empty");
+                }
+            });
+        }
+    }
 }
 function delEntry(event){
     listOfThings.removeChild(event.target.parentElement.parentElement);
-
 }
+
 function checkEntry(event){
     console.log(event)
     const checkbox = event.target;
