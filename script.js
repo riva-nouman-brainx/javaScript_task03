@@ -38,10 +38,22 @@ function createLIS(val){
     listCount++;
 }
 function editEntry(event){
-    const inputElement = document.createElement("input");
+    const tempArr=event.target.parentElement.previousElementSibling.children;
+    const inputElement=tempArr[0];
     inputElement.type = "text";
-    inputElement.value = textElement.textContent;
-
+    inputElement.style.height="28px";
+    inputElement.value=inputElement.nextElementSibling.innerHTML.trim();
+    inputElement.nextElementSibling.innerHTML="";
+    inputElement.addEventListener("keypress", function(event) {
+       if(event.key=="Enter" && inputElement.value.length!==0){
+        inputElement.nextElementSibling.innerHTML=inputElement.value;
+        inputElement.type = "checkbox";
+        inputElement.blur();
+       }
+       else if (event.key=="Enter" && inputElement.value.length===0){
+        alert("Don't leave the field empty");
+       }
+      });
 
 }
 function delEntry(event){
@@ -61,6 +73,4 @@ function checkEntry(event){
         }
     }
 }
-
-
 
